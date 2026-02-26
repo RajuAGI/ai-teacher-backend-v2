@@ -355,6 +355,7 @@ Structure:
 3. Real-life भारतीय Examples (200 words)
 4. Important Facts & Dates (200 words)
 5. परीक्षा के लिए Key Points (200 words)
+6. explanation में * (तारांकन) का प्रयोग नहीं करना है।
 हिंदी में लिखो। Technical terms English में रख सकते हो।
 Engaging और आसान भाषा use करो।"""
 
