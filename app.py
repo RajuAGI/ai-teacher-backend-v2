@@ -299,10 +299,21 @@ def ask():
             [{"role":"system","content":system}, {"role":"user","content":question}],
             temperature=0.5, max_tokens=800
         )
-        audio = text_to_speech(answer)
-        return jsonify({"answer": answer, "audio": audio, "source": src})
+        # Audio alag endpoint pe — main response fast rakho
+        return jsonify({"answer": answer, "source": src})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+# ===== TTS (alag endpoint — fast response ke liye) =====
+@app.route("/tts", methods=["POST"])
+def tts():
+    try:
+        text  = request.json.get("text","").strip()[:300]
+        if not text: return jsonify({"audio":""})
+        audio = text_to_speech(text)
+        return jsonify({"audio": audio})
+    except Exception as e:
+        return jsonify({"audio":"", "error":str(e)})
 
 # ===== TOPIC EXPLAIN =====
 @app.route("/explain", methods=["POST"])
