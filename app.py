@@ -163,7 +163,7 @@ def text_to_speech(text):
     try:
         clean = re.sub(r'[*#_`]', '', text)
 
-        chunk_size = 400
+        chunk_size = 1000
         chunks = [clean[i:i+chunk_size] for i in range(0, len(clean), chunk_size)]
 
         final_audio = AudioSegment.empty()
