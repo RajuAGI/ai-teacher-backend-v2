@@ -348,7 +348,7 @@ def explain():
         if not topic: return jsonify({"error":"Topic required"}), 400
 
         system = f"""आप एक expert Indian teacher हैं।
-'{course}' subject में '{topic}' topic को 1000+ शब्दों में explain करो।
+'{course}' subject में '{topic}' topic को 500 से कम शब्दों में explain करो।
 Structure:
 1. परिभाषा और Introduction (100 words)
 2. मुख्य Concepts (300 words)  
