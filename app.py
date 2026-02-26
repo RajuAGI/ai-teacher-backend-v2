@@ -153,16 +153,35 @@ def smart_search(query):
             return r, name
     return [], "None"
 
+import re
+import io
+import base64
+from gtts import gTTS
+
 def text_to_speech(text):
-    """Convert text to base64 audio."""
+    """Convert long text to base64 audio."""
     try:
         clean = re.sub(r'[*#_`]', '', text)
-        tts   = gTTS(text=clean[:500], lang="hi", slow=False)
-        buf   = io.BytesIO()
-        tts.write_to_fp(buf)
-        buf.seek(0)
-        return base64.b64encode(buf.read()).decode("utf-8")
-    except: return ""
+
+        # 400-500 chars ke chunks bana lo
+        chunk_size = 400
+        chunks = [clean[i:i+chunk_size] for i in range(0, len(clean), chunk_size)]
+
+        combined_audio = io.BytesIO()
+
+        for chunk in chunks:
+            tts = gTTS(text=chunk, lang="hi", slow=False)
+            temp_buf = io.BytesIO()
+            tts.write_to_fp(temp_buf)
+            temp_buf.seek(0)
+            combined_audio.write(temp_buf.read())
+
+        combined_audio.seek(0)
+        return base64.b64encode(combined_audio.read()).decode("utf-8")
+
+    except Exception as e:
+        print("Error:", e)
+        return ""
 
 # ===== SCORES =====
 def load_scores():
