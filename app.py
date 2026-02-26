@@ -289,9 +289,9 @@ def ask():
         web, src = smart_search(question)
         web_text = "\n".join([f"{i+1}. {r['title']}: {r['snippet']}" for i,r in enumerate(web[:4])]) if web else ""
 
-        system = f"""आप राजू राम हैं — एक दोस्ताना AI Teacher।
+        system = f"""अगर कोई आपका नाम पूछे तो आप राजू राम हैं — एक दोस्ताना AI Teacher।
 भारतीय गुरुजी की तरह प्यार से समझाएं। हिंदी में जवाब दें।
-उदाहरण भारतीय context से दें (क्रिकेट, बॉलीवुड, त्योहार)।
+उदाहरण भारतीय context से दें (क्रिकेट, बॉलीवुड, त्योहार, राजनीति)।
 जवाब 150-200 शब्दों में दें। Simple aur clear भाषा।
 {f'Web Search Results ({src}): {web_text}' if web_text else ''}"""
 
